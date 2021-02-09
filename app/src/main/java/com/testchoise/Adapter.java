@@ -8,26 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.testchoise.databinding.UserItemBinding;
 import com.testchoise.viewholder.ViewHolder;
-import com.testchoise.viewholder.ViewHolderUser;
 
 import java.util.List;
 
-public class Adapter<UIB extends ViewDataBinding, UM extends ItemModel, VH extends ViewHolder<UIB, UM>> extends RecyclerView.Adapter<VH> {
+public class Adapter<VDB extends ViewDataBinding, IM extends ItemModel, VH extends ViewHolder<VDB, IM>> extends RecyclerView.Adapter<VH> {
 
-    public interface Factory<VH, UIB>{
-        public VH build(UIB binding);
-    }
+    private final ViewHolder.Factory<VH, VDB> mFactory;
 
-    private final Factory<VH, UIB> mFactory;
-
-    List<UM> mItemsList;
+    List<IM> mItemsList;
     Context mContext;
     int mItemLayout;
 
-    public Adapter(Context context, List<UM> itemsList, int itemLayout, Factory<VH, UIB> factory){
+    public Adapter(Context context, List<IM> itemsList, int itemLayout, ViewHolder.Factory<VH, VDB> factory){
         mContext = context;
         mItemsList = itemsList;
         mItemLayout = itemLayout;
@@ -38,7 +31,7 @@ public class Adapter<UIB extends ViewDataBinding, UM extends ItemModel, VH exten
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        UIB binding = DataBindingUtil.inflate(inflater, mItemLayout, parent, false);
+        VDB binding = DataBindingUtil.inflate(inflater, mItemLayout, parent, false);
         return mFactory.build(binding);
     }
 

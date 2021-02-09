@@ -13,4 +13,10 @@ public abstract class ViewHolder<VDB extends ViewDataBinding, IM extends ItemMod
         super(binding.getRoot());
     }
     public abstract void bind(IM itemModel);
+
+
+    public interface Factory<VH, VDB>{
+        public VH build(VDB binding);
+    }
+
 }
