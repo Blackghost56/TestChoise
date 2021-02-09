@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import com.testchoise.Adapter;
 import com.testchoise.R;
 import com.testchoise.UserModel;
+import com.testchoise.databinding.UserItemBinding;
+import com.testchoise.viewholder.ViewHolderUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,13 @@ public class MainFragment extends Fragment {
         list.add(new UserModel("One"));
         list.add(new UserModel("Two"));
 
-        Adapter adapter = new Adapter(getContext(), list, R.layout.user_item);
+//        Adapter adapter = new Adapter(getContext(), list, R.layout.user_item);
+        Adapter<ViewHolderUser> adapter = new Adapter<>(getContext(), list, R.layout.user_item, new Adapter.Factory<ViewHolderUser>() {
+            @Override
+            public ViewHolderUser build(UserItemBinding binding) {
+                return new ViewHolderUser(binding);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
 
