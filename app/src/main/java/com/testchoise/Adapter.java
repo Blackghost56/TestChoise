@@ -15,33 +15,30 @@ import com.testchoise.viewholder.ViewHolderUser;
 
 import java.util.List;
 
-public class Adapter<VH extends ViewHolder<UserItemBinding, UserModel>> extends RecyclerView.Adapter<VH> {
+public class Adapter<UIB extends ViewDataBinding, UM extends ItemModel, VH extends ViewHolder<UIB, UM>> extends RecyclerView.Adapter<VH> {
 
-    public interface Factory<VH>{
-        public VH build(UserItemBinding binding);
+    public interface Factory<VH, UIB>{
+        public VH build(UIB binding);
     }
 
-    private final Factory<VH> mFactory;
+    private final Factory<VH, UIB> mFactory;
 
-    List<UserModel> mItemsList;
+    List<UM> mItemsList;
     Context mContext;
     int mItemLayout;
 
-    public Adapter(Context context, List<UserModel> itemsList, int itemLayout, Factory<VH> factory){
+    public Adapter(Context context, List<UM> itemsList, int itemLayout, Factory<VH, UIB> factory){
         mContext = context;
         mItemsList = itemsList;
         mItemLayout = itemLayout;
         mFactory = factory;
     }
 
-
-
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        UserItemBinding binding = DataBindingUtil.inflate(inflater, mItemLayout, parent, false);
-//        return new VH(binding);
+        UIB binding = DataBindingUtil.inflate(inflater, mItemLayout, parent, false);
         return mFactory.build(binding);
     }
 
@@ -50,20 +47,6 @@ public class Adapter<VH extends ViewHolder<UserItemBinding, UserModel>> extends 
     public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.bind(mItemsList.get(position));
     }
-
-//    @NonNull
-//    @Override
-//    public ViewHolderUser onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-//        UserItemBinding binding = DataBindingUtil.inflate(inflater, mItemLayout, parent, false);
-//        return new ViewHolderUser(binding);
-//    }
-
-
-//    @Override
-//    public void onBindViewHolder(@NonNull ViewHolderUser holder, int position) {
-//        holder.bind(mItemsList.get(position));
-//    }
 
     @Override
     public int getItemCount() {

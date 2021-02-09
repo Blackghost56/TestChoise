@@ -52,13 +52,7 @@ public class MainFragment extends Fragment {
         list.add(new UserModel("One"));
         list.add(new UserModel("Two"));
 
-//        Adapter adapter = new Adapter(getContext(), list, R.layout.user_item);
-        Adapter<ViewHolderUser> adapter = new Adapter<>(getContext(), list, R.layout.user_item, new Adapter.Factory<ViewHolderUser>() {
-            @Override
-            public ViewHolderUser build(UserItemBinding binding) {
-                return new ViewHolderUser(binding);
-            }
-        });
+        Adapter<UserItemBinding, UserModel, ViewHolderUser> adapter = new Adapter<>(getContext(), list, R.layout.user_item, ViewHolderUser::new);
         recyclerView.setAdapter(adapter);
 
 
