@@ -9,10 +9,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.testchoise.databinding.UserItemBinding;
+import com.testchoise.viewholder.ViewHolderUser;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<ViewHolder.ViewHolderUser> {
+public class Adapter extends RecyclerView.Adapter<ViewHolderUser> {
 
     List<UserModel> mItemsList;
     Context mContext;
@@ -26,14 +27,14 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder.ViewHolderUser> {
 
     @NonNull
     @Override
-    public ViewHolder.ViewHolderUser onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolderUser onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         UserItemBinding binding = DataBindingUtil.inflate(inflater, mItemLayout, parent, false);
-        return new ViewHolder.ViewHolderUser(binding);
+        return new ViewHolderUser(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder.ViewHolderUser holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolderUser holder, int position) {
         holder.bind(mItemsList.get(position));
     }
 

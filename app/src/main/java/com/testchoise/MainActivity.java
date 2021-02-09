@@ -31,19 +31,6 @@ public class MainActivity extends AppCompatActivity {
                     .commitNow();
         }
 
-
-//
-//        RecyclerView recyclerView = findViewById(R.id.itemsList);
-////        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));  //??
-//
-//        List<UserModel> list = new ArrayList<>();
-//        list.add(new UserModel("One"));
-//        list.add(new UserModel("Two"));
-//
-//        Adapter adapter = new Adapter(this, list, R.layout.user_item);
-//        recyclerView.setAdapter(adapter);
-
     }
 
 
